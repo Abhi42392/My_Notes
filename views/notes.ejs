@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/notes.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Book Information -->
+        <div class="item">
+            <div class="book_cover">
+                <img id="image" src="//covers.openlibrary.org/b/id/<%= item.cover_id %>-M.jpg"
+                     srcset="//covers.openlibrary.org/b/id/<%= item.cover_id %>-M.jpg 2x" alt="Book cover">
+            </div>
+            <div class="book_content">
+                <p>Title: <%= item.title %></p>
+                <p>Author: <%= item.author %></p>
+                <p>Date Read: <%= item.date_read %></p>
+                <p>Rating: <%= item.rating %></p>
+                <form action="/delete" method="POST">
+                    <div>
+                        <button type="submit" id="delete" name="id" value="<%= item.book_id %>" class="delete-button btn btn-danger">
+                            Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Separator -->
+        <hr>
+
+        <!-- Summary Section -->
+        <div class="summary">
+            <h2>Summary</h2>
+            <p><%= item.summary %></p>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="notes">
+            <h2>My Notes</h2>
+            <form action="/edit" method="POST">
+                <div class="text-area">
+                    <textarea id="my_notes" name="note" class="form-control" ><%= item.note %></textarea>
+                    <button id="update" type="submit" class="btn btn-success mt-2">Update Notes</button>
+                    <input type="hidden" name="id" value=<%=item.book_id%>>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript to Adjust Textarea Height -->
+    <script>
+        const textarea = document.querySelector("#my_notes");
+
+        // Function to adjust the height of the textarea dynamically
+        const adjustTextareaHeight = () => {
+            textarea.style.height = 'auto'; // Reset the height to auto
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set the height based on the scrollHeight
+        };
+
+        // Adjust height immediately after loading the content
+        window.addEventListener('load', () => {
+            adjustTextareaHeight(); // Adjust height when the page loads
+        });
+
+        // Adjust height when content changes due to user input
+        textarea.addEventListener("input", adjustTextareaHeight);
+
+    </script>
+</body>
+</html>

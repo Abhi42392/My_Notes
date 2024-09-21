@@ -1,0 +1,15 @@
+form{
+    margin: 100px 25%;
+}
+
+button{
+    background-color: rgb(26, 26, 199);
+    color: #fff;
+    padding: 7px 25px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 50px;
+}
