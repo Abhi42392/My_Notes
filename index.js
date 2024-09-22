@@ -11,14 +11,17 @@ app.use(express.static("public"));
 
 //Establishing connection between database and server
 const db=new pg.Client({
-    user:"postgres",
-    host:"127.0.0.1",
-    password:"Abhi@42392427",
-    database:"Notes",
-    port:5432
+    user: process.env.DB_USER,         
+  host: process.env.DB_HOST,        
+  password: process.env.DB_PASSWORD, 
+  database: process.env.DB_NAME,     
+  port: process.env.DB_PORT || 5432
 });
 
-db.connect();
+db.connect()
+  .then(() => console.log('Connected to the database'))
+  .catch(err => console.error('Connection error', err.stack));
+
 
 var notes=[];
 
