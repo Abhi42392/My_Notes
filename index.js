@@ -4,7 +4,7 @@ import pg from "pg";
 import axios from "axios";
 
 const app=express();
-const port=3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -38,8 +38,8 @@ app.get("/",async (req,res)=>{
     res.render("index.ejs",{noteItems:notes});
 });
 
-app.listen(port,(req,res)=>{
-    console.log(`Server is running on port ${port}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 app.get("/notes",async (req,res)=>{
